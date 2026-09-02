@@ -1,4 +1,4 @@
-package com.cheter0410.client;
+package com.cheter0410.blindspot.client;
 
 import net.fabricmc.api.ClientModInitializer;
 

@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "com.cheter0410.client.mixin",
+	"package": "com.cheter0410.blindspot.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
 		"ExampleClientMixin"

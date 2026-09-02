@@ -1,4 +1,4 @@
-package com.cheter0410;
+package com.cheter0410.blindspot;
 
 import net.fabricmc.api.ModInitializer;
 

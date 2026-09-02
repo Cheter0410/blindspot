@@ -1,4 +1,4 @@
-package com.cheter0410.mixin;
+package com.cheter0410.blindspot.mixin;
 
 import net.minecraft.server.MinecraftServer;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,4 +1,4 @@
-# Blindspot
+# blindspot
 
 ## Setup
 
