@@ -1,6 +1,9 @@
 # Blindspot
 
 [![Modrinth](https://img.shields.io/modrinth/dt/blindspot?color=00AF5C&label=Modrinth&logo=modrinth)](https://modrinth.com/mod/blindspot)
+[![GitHub](https://img.shields.io/badge/GitHub-repo-181717?logo=github)](https://github.com/cheter0410/blindspot)
+[![GitHub Release](https://img.shields.io/github/v/release/cheter0410/blindspot)](https://github.com/cheter0410/blindspot/releases)
+[![GitHub Issues](https://img.shields.io/github/issues/cheter0410/blindspot)](https://github.com/cheter0410/blindspot/issues)
 [![License](https://img.shields.io/github/license/cheter0410/blindspot)](LICENSE)
 
 A Minecraft Fabric mod aiming to fix small, overlooked client-side performance issues that larger optimization mods don't cover.
@@ -14,7 +17,7 @@ A Minecraft Fabric mod aiming to fix small, overlooked client-side performance i
 
 ## Features
 
-- **Friends List Optimization:** Eliminates continuous updates in the presence handler.
+- **Friends List Optimization:** Caches the friends list instead of rebuilding it on every call.
 
 <details>
 <summary><b>Technical Details & Deep Dives</b></summary>
