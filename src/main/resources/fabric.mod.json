@@ -24,7 +24,7 @@
 		]
 	},
 	"mixins": [
-		"blindspot.mixins.json",
+
 		{
 			"config": "blindspot.client.mixins.json",
 			"environment": "client"
