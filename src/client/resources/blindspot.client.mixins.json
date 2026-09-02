@@ -3,7 +3,7 @@
 	"package": "com.cheter0410.blindspot.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
-		"ExampleClientMixin"
+		"PresenceHandlerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
