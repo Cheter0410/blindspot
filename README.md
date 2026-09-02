@@ -14,9 +14,7 @@ A Minecraft Fabric mod aiming to fix small, overlooked client-side performance i
 
 ## Features
 
-Blindspot targets specific micro-stutters and inefficient background tasks in the vanilla client.
-
-- **Friends List Optimization:** Eliminates continuous memory allocations in the presence handler, recovering up to 5% of frame time.
+- **Friends List Optimization:** Eliminates continuous updates in the presence handler.
 
 <details>
 <summary><b>Technical Details & Deep Dives</b></summary>
