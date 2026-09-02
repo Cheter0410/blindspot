@@ -4,7 +4,7 @@
 [![GitHub](https://img.shields.io/badge/GitHub-repo-181717?logo=github)](https://github.com/cheter0410/blindspot)
 [![GitHub Release](https://img.shields.io/github/v/release/cheter0410/blindspot)](https://github.com/cheter0410/blindspot/releases)
 [![GitHub Issues](https://img.shields.io/github/issues/cheter0410/blindspot)](https://github.com/cheter0410/blindspot/issues)
-[![License](https://img.shields.io/github/license/cheter0410/blindspot)](LICENSE)
+[![License](https://img.shields.io/github/license/cheter0410/blindspot)](https://github.com/cheter0410/blindspot/blob/main/LICENSE)
 
 A Minecraft Fabric mod aiming to fix small, overlooked client-side performance issues that larger optimization mods don't cover.
 
@@ -32,7 +32,7 @@ Blindspot caches the result and only recomputes it when the underlying friend da
 
 ## Installation
 
-1. Download the jar from [Modrinth](PLATZHALTER_MODRINTH_URL) or the [GitHub Releases page](PLATZHALTER_GITHUB_RELEASES_URL).
+1. Download the jar from [Modrinth](https://modrinth.com/mod/blindspot) or the [GitHub Releases page](https://github.com/cheter0410/blindspot/releases)
 2. Place it in your `mods` folder alongside Fabric API.
 3. Launch the game normally.
 
@@ -42,7 +42,7 @@ Blindspot only uses vanilla client-side code and doesn't modify rendering, world
 
 ## License
 
-Licensed under LGPL-3.0-only. See [LICENSE](LICENSE) for details.
+Licensed under LGPL-3.0-only. See [LICENSE](https://github.com/cheter0410/blindspot/blob/main/LICENSE) for details.
 
 ## Contributing
 
