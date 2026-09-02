@@ -5,11 +5,12 @@
 	"name": "blindspot",
 	"description": "A Minecraft Fabric mod aiming to improve multiple small performance issues.",
 	"authors": [
-		"Me!"
+		"Cheter0410"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/mod/blindspot",
+		"sources": "https://github.com/Cheter0410/blindspot",
+        "issues": "https://github.com/Cheter0410/blindspot/issues"
 	},
 	"license": "LGPL-3.0-only",
 	"icon": "assets/blindspot/icon.png",
