@@ -3,7 +3,7 @@
 	"id": "blindspot",
 	"version": "${version}",
 	"name": "blindspot",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "A Minecraft Fabric mod aiming to improve multiple small performance issues.",
 	"authors": [
 		"Me!"
 	],
@@ -11,7 +11,7 @@
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
-	"license": "CC0-1.0",
+	"license": "LGPL-3.0-only",
 	"icon": "assets/blindspot/icon.png",
 	"environment": "*",
 	"entrypoints": {
