@@ -10,9 +10,9 @@ A Minecraft Fabric mod aiming to fix small, overlooked client-side performance i
 
 ## Requirements
 
-- Minecraft 26.2
-- Fabric Loader >= 0.19.3
-- Fabric API
+- Minecraft 26.3
+- Fabric Loader >= 0.19.5
+- Fabric API 0.161.0+26.3
 - Java 25+
 
 ## Features
