@@ -12,7 +12,7 @@ A Minecraft Fabric mod aiming to fix small, overlooked client-side performance i
 
 - Minecraft 26.2
 - Fabric Loader >= 0.19.3
-- Fabric API
+- Fabric API 0.159.0+26.2
 - Java 25+
 
 ## Features
