@@ -3,7 +3,12 @@
 	"package": "com.cheter0410.blindspot.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
-		"PlayerSocialManagerMixin"
+		"ClientPacketListenerMixin",
+		"HudMixin",
+		"PlayerInfoMixin",
+		"PlayerSocialManagerMixin",
+		"PlayerTabOverlayMixin",
+		"ScoreboardMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

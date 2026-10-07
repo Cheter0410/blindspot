@@ -2,15 +2,15 @@
 	"schemaVersion": 1,
 	"id": "blindspot",
 	"version": "${version}",
-	"name": "blindspot",
-	"description": "A Minecraft Fabric mod aiming to improve multiple small performance issues.",
+	"name": "Blindspot",
+	"description": "Fixes small, overlooked client-side performance issues that larger optimization mods don't cover.",
 	"authors": [
 		"Cheter0410"
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/mod/blindspot",
 		"sources": "https://github.com/Cheter0410/blindspot",
-        "issues": "https://github.com/Cheter0410/blindspot/issues"
+		"issues": "https://github.com/Cheter0410/blindspot/issues"
 	},
 	"license": "LGPL-3.0-only",
 	"icon": "assets/blindspot/icon.png",
@@ -24,7 +24,6 @@
 		]
 	},
 	"mixins": [
-
 		{
 			"config": "blindspot.client.mixins.json",
 			"environment": "client"
@@ -33,7 +32,6 @@
 	"depends": {
 		"fabricloader": ">=0.19.5",
 		"minecraft": "~26.3",
-		"java": ">=25",
-		"fabric-api": "*"
+		"java": ">=25"
 	}
 }
