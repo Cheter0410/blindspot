@@ -5,7 +5,7 @@ import com.cheter0410.blindspot.client.cache.ScoreboardCacheHolder;
 import com.cheter0410.blindspot.client.cache.SidebarCache;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.client.gui.Hud;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.world.scores.Objective;
 import net.minecraft.world.scores.PlayerScoreEntry;
 import net.minecraft.world.scores.Scoreboard;
@@ -32,8 +32,8 @@ import java.util.stream.Stream;
  * On a miss, vanilla's own pipeline (including any changes other mods make to it) produces the result,
  * which is captured at {@code limit}.
  */
-@Mixin(Hud.class)
-public class HudMixin {
+@Mixin(Gui.class)
+public class GuiMixin {
 
     @Shadow
     @Final
