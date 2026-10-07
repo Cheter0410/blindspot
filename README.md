@@ -10,7 +10,7 @@ A Minecraft Fabric mod aiming to fix small, overlooked client-side performance i
 
 ## Requirements
 
-- Minecraft 26.2
+- Minecraft 26.1 (26.1, 26.1.1, 26.1.2)
 - Fabric Loader >= 0.19.5
 - Java 25+
 
@@ -18,18 +18,11 @@ Fabric API is not required.
 
 ## Features
 
-- **Friends List Optimization:** Caches the friends list instead of rebuilding it on every call.
 - **Scoreboard Sidebar Optimization:** Caches the sorted sidebar entries instead of scanning and sorting every score on every frame.
 - **Tab List Optimization:** Caches the tab list player order instead of re-sorting all players on every frame while the list is open.
 
 <details>
 <summary><b>Technical Details & Deep Dives</b></summary>
-
-### Friends List presence check overhead
-
-Vanilla's `PlayerSocialManager.getFriends()` converts the whole friends list into a new list through a `Stream` on every call, even though the underlying data only changes when a new friend list arrives. While the friends list is enabled, `PresenceHandler.tick()` calls it once per rendered frame (it is called from `Minecraft.runTick`, not from the 20-per-second game tick). The cost per call is small, but it is repeated work that produces the same result each time.
-
-Blindspot caches the result and only recomputes it when vanilla stores new friend data.
 
 ### Scoreboard sidebar rebuilt every frame
 

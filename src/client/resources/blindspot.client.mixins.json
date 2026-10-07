@@ -4,9 +4,8 @@
 	"compatibilityLevel": "JAVA_25",
 	"client": [
 		"ClientPacketListenerMixin",
-		"HudMixin",
+		"GuiMixin",
 		"PlayerInfoMixin",
-		"PlayerSocialManagerMixin",
 		"PlayerTabOverlayMixin",
 		"ScoreboardMixin"
 	],
