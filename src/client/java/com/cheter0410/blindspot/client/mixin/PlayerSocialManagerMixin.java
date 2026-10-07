@@ -1,45 +1,42 @@
 package com.cheter0410.blindspot.client.mixin;
 
+import com.cheter0410.blindspot.client.cache.FriendsCache;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.authlib.yggdrasil.response.FriendDto;
 import net.minecraft.client.gui.screens.social.PlayerSocialManager;
 import net.minecraft.client.gui.screens.social.PlayerSocialManager.PlayerData;
-import net.minecraft.client.gui.screens.social.RemoteFriendListUpdateHandler;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
+/**
+ * Caches the result of {@code getFriends()}. The friend data is replaced (not mutated) by the
+ * "Friends List" thread on every successful update, so the input list's identity tells whether the
+ * cached output is still valid.
+ * <p>
+ * The wrapper receives exactly the list vanilla read, so input and output always belong together even
+ * when the background thread swaps the data mid-call. Both are stored in one immutable record so a
+ * reader on another thread never sees a mismatched pair.
+ */
 @Mixin(PlayerSocialManager.class)
 public class PlayerSocialManagerMixin {
 
-    @Shadow
-    @Final
-    private RemoteFriendListUpdateHandler remoteFriendListUpdateHandler;
-
     @Unique
-    private List<FriendDto> blindspot$cachedInput;
+    private volatile FriendsCache blindspot$friendsCache;
 
-    @Unique
-    private List<PlayerData> blindspot$cachedOutput;
-
-    @Inject(method = "getFriends", at = @At("HEAD"), cancellable = true)
-    private void blindspot$useCacheIfUnchanged(CallbackInfoReturnable<List<PlayerData>> cir) {
-        List<FriendDto> current = this.remoteFriendListUpdateHandler.getLatestFriendData().friends();
-
-        if (current == blindspot$cachedInput) {
-            cir.setReturnValue(blindspot$cachedOutput);
+    @WrapOperation(method = "getFriends", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/social/PlayerSocialManager;remap(Ljava/util/List;)Ljava/util/List;"))
+    private List<PlayerData> blindspot$useCachedFriends(List<FriendDto> friends, Operation<List<PlayerData>> original) {
+        FriendsCache cache = blindspot$friendsCache;
+        if (cache != null && cache.input() == friends) {
+            return cache.output();
         }
-    }
 
-    @Inject(method = "getFriends", at = @At("RETURN"))
-    private void blindspot$updatedCache(CallbackInfoReturnable<List<PlayerData>> cir) {
-        blindspot$cachedInput = this.remoteFriendListUpdateHandler.getLatestFriendData().friends();
-        blindspot$cachedOutput = cir.getReturnValue();
+        // Vanilla returns Stream.toList(), which is already unmodifiable and safe to share.
+        List<PlayerData> output = original.call(friends);
+        blindspot$friendsCache = new FriendsCache(friends, output);
+        return output;
     }
 }
