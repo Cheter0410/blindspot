@@ -5,6 +5,7 @@
 	"client": [
 		"ClientPacketListenerMixin",
 		"HudMixin",
+		"ObjectiveMixin",
 		"PlayerInfoMixin",
 		"PlayerSocialManagerMixin",
 		"PlayerTabOverlayMixin",

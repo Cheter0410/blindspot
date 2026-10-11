@@ -1,6 +1,7 @@
 package com.cheter0410.blindspot.client.mixin;
 
 import com.cheter0410.blindspot.client.cache.CacheVerification;
+import com.cheter0410.blindspot.client.cache.ObjectiveCacheHolder;
 import com.cheter0410.blindspot.client.cache.ScoreboardCacheHolder;
 import com.cheter0410.blindspot.client.cache.SidebarCache;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -51,23 +52,18 @@ public class HudMixin {
     @Unique
     private int blindspot$scoresVersion;
     @Unique
-    private int blindspot$teamsVersion;
-    @Unique
     private SidebarCache blindspot$hit;
 
     @WrapOperation(method = "displayScoreboardSidebar", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/scores/Scoreboard;listPlayerScores(Lnet/minecraft/world/scores/Objective;)Ljava/util/Collection;"))
     private Collection<PlayerScoreEntry> blindspot$useCachedScores(Scoreboard scoreboard, Objective objective, Operation<Collection<PlayerScoreEntry>> original) {
-        ScoreboardCacheHolder holder = (ScoreboardCacheHolder) scoreboard;
-        int scoresVersion = holder.blindspot$scoresVersion();
-        int teamsVersion = holder.blindspot$teamsVersion();
-        SidebarCache cache = holder.blindspot$sidebarCache();
+        int scoresVersion = ((ObjectiveCacheHolder) objective).blindspot$scoresVersion();
+        SidebarCache cache = ((ScoreboardCacheHolder) scoreboard).blindspot$sidebarCache();
 
         blindspot$scoreboard = scoreboard;
         blindspot$objective = objective;
         blindspot$scoresVersion = scoresVersion;
-        blindspot$teamsVersion = teamsVersion;
 
-        if (cache != null && cache.isValidFor(objective, scoresVersion, teamsVersion)) {
+        if (cache != null && cache.isValidFor(objective, scoresVersion)) {
             blindspot$hit = cache;
             return cache.entries();
         }
@@ -110,7 +106,7 @@ public class HudMixin {
             blindspot$sidebarVerification.miss();
         }
         ((ScoreboardCacheHolder) scoreboard).blindspot$setSidebarCache(
-                new SidebarCache(objective, blindspot$scoresVersion, blindspot$teamsVersion, limit, entries));
+                new SidebarCache(objective, blindspot$scoresVersion, limit, entries));
         return entries.stream();
     }
 
