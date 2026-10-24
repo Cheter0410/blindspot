@@ -3,8 +3,10 @@
 	"package": "com.cheter0410.blindspot.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
+		"AbstractBoatMixin",
 		"ClientPacketListenerMixin",
 		"HudMixin",
+		"LevelChunkMixin",
 		"PlayerInfoMixin",
 		"PlayerSocialManagerMixin",
 		"PlayerTabOverlayMixin",
