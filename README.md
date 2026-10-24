@@ -20,6 +20,7 @@ Fabric API is not required.
 
 - **Scoreboard Sidebar Optimization:** Caches the sorted sidebar entries instead of scanning and sorting every score on every frame.
 - **Tab List Optimization:** Caches the tab list player order instead of re-sorting all players on every frame while the list is open.
+- **Boat Status Optimization:** Caches whether a boat is in water, under water, on land or in the air instead of rescanning the blocks around every boat on every tick.
 
 <details>
 <summary><b>Technical Details & Deep Dives</b></summary>
@@ -36,9 +37,15 @@ While the tab list is open, vanilla sorts all listed players on every frame. Eac
 
 Blindspot caches the sorted order and lets vanilla rebuild it only when a player is added to or removed from the list, a player's game mode or list order changes, or team membership changes. Ping updates, display names and skins don't affect the order and don't cause a rebuild. The rows themselves (names, ping, scores, hearts) are still drawn by vanilla every frame.
 
+### Boat status rescanned every tick
+
+Every tick, vanilla works out for each boat whether it is in water, under water, on land or in the air. To do so it scans the fluids around the boat and, if it isn't in water, the collision shapes of all blocks below it. This also happens for boats that are parked or moved by the server, and with many boats around it adds up, even though neither the boat nor the blocks near it changed.
+
+Blindspot keeps the last result per boat together with its bounding box and the chunks around it. Every chunk gets a version counter that changes with each block change and whenever the server sends new chunk data. The result is reused only while the bounding box is exactly the same and none of those chunks changed or was unloaded. Otherwise vanilla computes the status as usual. A few blocks, such as pistons, shulker boxes and scaffolding, can change their collision shape without a block change. Vanilla marks these as having a dynamic shape, and results that depend on one are never cached. Only the client world uses the cache, the integrated server in singleplayer is unchanged.
+
 ### Verifying the caches
 
-Start the game with the JVM argument `-Dblindspot.verifyCaches=true` to make Blindspot compute the vanilla result alongside every sidebar and tab list cache hit and compare them. The log then shows any mismatch and, every 1,000 checks, the hit rate. Every check runs the full vanilla computation in addition to the cache, so the game is slower than without Blindspot while it's enabled. It's only meant for testing and bug reports.
+Start the game with the JVM argument `-Dblindspot.verifyCaches=true` to make Blindspot compute the vanilla result alongside every sidebar, tab list and boat status cache hit and compare them. The log then shows any mismatch and, every 1,000 checks, the hit rate. Every check runs the full vanilla computation in addition to the cache, so the game is slower than without Blindspot while it's enabled. It's only meant for testing and bug reports.
 
 </details>
 
@@ -50,11 +57,11 @@ Start the game with the JVM argument `-Dblindspot.verifyCaches=true` to make Bli
 
 ## Compatibility
 
-Blindspot doesn't change what is drawn, what is sent to or received from a server, or how the world is simulated. Its hooks into the sidebar, tab list, scoreboard and packet handling code only cache results vanilla would compute anyway, or note when those results change.
+Blindspot doesn't change what is drawn, what is sent to or received from a server, or how the world is simulated. Its hooks into the sidebar, tab list, scoreboard, boat, chunk and packet handling code only cache results vanilla would compute anyway, or note when those results change.
 
 Tested together with Sodium 0.9.2 and Lithium 0.26.2 on Minecraft 26.3, in singleplayer and multiplayer. It hasn't been tested with every mod.
 
-Mods that completely replace the vanilla sidebar or tab list code may conflict with it. Blindspot is set up so that such a conflict usually shows up as a crash at startup instead of silently wrong results in game. If you run into one, please open an issue with your log.
+Mods that completely replace the vanilla sidebar, tab list or boat code may conflict with it. Blindspot is set up so that such a conflict usually shows up as a crash at startup instead of silently wrong results in game. If you run into one, please open an issue with your log.
 
 ## Building
 
